@@ -2,10 +2,15 @@ SampleApp::Application.routes.draw do
   #get "users/new"
 
   resources :users #endows app with all actions for a RESTful Users resource
+
+  resources :sessions, only: [ :new, :create, :destroy]
+  
   #get "static_pages/home"
   root 'static_pages#home'
   
   match '/signup',  to: 'users#new',            via:'get'
+  match '/signin',  to: 'sessions#new',         via:'get'
+  match '/signout', to: 'sessions#destroy',     via:'delete'
 
   #get "static_pages/help"
   match '/help',    to: 'static_pages#help',    via: 'get'
